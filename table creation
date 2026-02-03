@@ -1,0 +1,88 @@
+
+-- creating database 
+create database employee;
+use employee;
+
+-- creating 3 table named Departments,Location,employees
+
+create table Departments (
+department_id int primary key,
+department_name varchar(100)
+);
+
+CREATE TABLE location (
+location_id int primary key ,
+location varchar (30)
+);
+
+CREATE TABLE employees (
+employee_id int primary key ,
+employee_name varchar(100),
+gender enum ('M','F'),
+age int ,
+hire_date date ,
+designation varchar (100),
+department_id int,
+location_id int ,
+foreign key (department_id) references Departments (department_id),
+foreign key ( location_id) references location (location_id),
+salary decimal (10,2)
+);
+
+
+-- altering tables datas 
+
+alter table	employees drop email ;
+alter table employees add email varchar(250);
+alter table employees drop age;
+alter table employees rename column hire_date to date_of_joining;
+
+
+-- Renaming 
+rename table departments to departments_info;
+RENAME TABLE location to Locations;
+
+-- table truncation 
+
+TRUNCATE TABLE employees;
+drop database employee;
+
+
+
+-- RECREATION WITH CONSTRAINTS
+
+CREATE database EMPLOYEE;
+USE EMPLOYEE;
+CREATE table DEPARTMENTS(
+department_id int unique primary key,
+department_name varchar(100) unique not null
+);
+drop table departmets;
+
+drop table locations;
+
+CREATE table LOCATIONS (
+location_id int not null AUTO_INCREMENT,
+location varchar(200) not null unique ,
+PRIMARY KEY (location_id)
+);
+
+
+
+CREATE TABLE employees (
+employee_id int primary key unique  ,
+employee_name varchar(100) not null,
+gender enum ('M','F') not null,
+age int  ,
+constraint CHK_employeeage check (age >= 18),
+hire_date date ,
+designation varchar (100),
+department_id int,
+location_id int ,
+FOREIGN KEY (department_id) references DEPARTMENTS (department_id),
+FOREIGN KEY (location_id) references LOCATIONS (location_id),
+salery decimal (10,2)
+);
+
+
+
